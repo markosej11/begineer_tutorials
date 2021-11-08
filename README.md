@@ -18,13 +18,13 @@ Tutorial on how to create a simple service to chnage the message
 
 # Build Instructions
 '''
-mkdir -p ~/catkin_ws/src
-cd ~/catkin_ws/src
-git clone --recursive https://github.com/markosej11/begineer_tutorials/tree/main
-source devel/setup.bash
-cd ..
-catkin_make
-source ~/catkin_ws/devel/setup.bash
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/src
+$ git clone --recursive https://github.com/markosej11/begineer_tutorials/tree/main
+$ source devel/setup.bash
+$ cd ..
+$ catkin_make
+$ source ~/catkin_ws/devel/setup.bash
 '''
 
 # Running Instructions
