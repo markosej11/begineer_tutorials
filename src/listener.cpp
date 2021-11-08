@@ -4,6 +4,7 @@
 */
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "begineer_tutorials/modifyMessages.h"
 /**
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
@@ -49,6 +50,18 @@ int main(int argc, char** argv) {
    * callbacks will be called from within this thread (the main one).  ros::spin()
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
+
+  ros::Duration(5.0).sleep();
+  ros::ServiceClient client =
+   n.serviceClient<begineer_tutorials::modifyMessages>("changeMsg");
+  begineer_tutorials::modifyMessages srv;
+  srv.request.newMsg = "Message has been changed";
+  if (client.call(srv)) {
+    ROS_INFO("Response received : %d", static_cast<int>(srv.response.resp));
+  } else {
+    ROS_ERROR_STREAM("Failed to call service ");
+    return 1;
+  }
   ros::spin();
   return 0;
 }
