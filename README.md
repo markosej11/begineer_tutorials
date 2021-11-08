@@ -10,7 +10,7 @@ Tutorial on how to create a simple service to chnage the message
 * The user can also change frquency of publisher during launch
 
 ## rqt_console screenshot
-![image](https://github.com/markosej11/begineer_tutorials/blob/Week10_HW/Screenshot.png
+![image](https://github.com/markosej11/begineer_tutorials/blob/Week10_HW/Screenshot.png)
 
 ## Requirements
 * catkin
