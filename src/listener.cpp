@@ -9,7 +9,7 @@
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
+  ROS_INFO_STREAM("Listener : " << msg->data.c_str());
 }
 /**
  * The ros::init() function needs to see argc and argv so that it can perform
@@ -44,20 +44,20 @@ int main(int argc, char** argv) {
    * is the number of messages that will be buffered up before beginning to throw
    * away the oldest ones.
    */
-  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+  ros::Subscriber sub = n.subscribe("chatter", 5, chatterCallback);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
 
-  ros::Duration(5.0).sleep();
+  ros::Duration(4.0).sleep();
   ros::ServiceClient client =
-   n.serviceClient<begineer_tutorials::modifyMessages>("changeMsg");
+   n.serviceClient<begineer_tutorials::modifyMessages>("modifyMessages");
   begineer_tutorials::modifyMessages srv;
-  srv.request.newMsg = "Message has been changed";
+  srv.request.newMsg = " \"Changed message to Assignment completed successfully\"";
   if (client.call(srv)) {
-    ROS_INFO("Response received : %d", static_cast<int>(srv.response.resp));
+    ROS_INFO_STREAM("Response received : " << static_cast<int>(srv.response.resp));
   } else {
     ROS_ERROR_STREAM("Failed to call service ");
     return 1;
