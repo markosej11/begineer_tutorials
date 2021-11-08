@@ -6,7 +6,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "begineer_tutorials/modifyMessages.h"
-#include <ros/console.h>
+
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -46,7 +46,8 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-  ros::ServiceServer service = n.advertiseService("modifyMessages", modifyMyMessage);
+  ros::ServiceServer service = n.advertiseService("modifyMessages",
+  modifyMyMessage);
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -67,10 +68,9 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 5);
   int frequency = 2;
   bool result = n.getParam("frequency", frequency);
-  if (result){
+  if (result) {
     ROS_INFO_STREAM("successfully got the param");
-  }
-  else {
+  } else {
     ROS_WARN_STREAM("Something is wrong with param");
   }
   ros::Rate loop_rate(frequency);

@@ -55,9 +55,10 @@ int main(int argc, char** argv) {
   ros::ServiceClient client =
    n.serviceClient<begineer_tutorials::modifyMessages>("modifyMessages");
   begineer_tutorials::modifyMessages srv;
-  srv.request.newMsg = " \"Changed message to Assignment completed successfully\"";
+  srv.request.newMsg = " \"Changed msg to Assignment completed successfully\"";
   if (client.call(srv)) {
-    ROS_INFO_STREAM("Response received : " << static_cast<int>(srv.response.resp));
+    ROS_INFO_STREAM("Response received : "
+    << static_cast<int>(srv.response.resp));
   } else {
     ROS_ERROR_STREAM("Failed to call service ");
     return 1;
