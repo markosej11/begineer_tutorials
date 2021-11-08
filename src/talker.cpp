@@ -18,11 +18,11 @@ bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req, \
   ROS_INFO("Request recieved to change string to %s", req.newMsg);
   try {
     pubMessage = req.newMsg;
-    ROS_WARN("Successfully changed the string");
+    ROS_WARN("Successfully changed the string message");
     return true;
   }
   catch (const std::exception&) {
-    ROS_ERROR("Couldn't change the string");
+    ROS_ERROR("Couldn't change the string message");
   }
   return false;
 }
