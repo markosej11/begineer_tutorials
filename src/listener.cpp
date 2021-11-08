@@ -4,23 +4,26 @@
 */
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-/**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
+#include "begineer_tutorials/modifyMessages.h"
+
+/** @brief This is the interrupt handler 
+ * @param String message that arises at the interrupt
+ * @return None
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
+  ROS_INFO_STREAM("Listener : " << msg->data.c_str());
 }
-/**
- * The ros::init() function needs to see argc and argv so that it can perform
- * any ROS arguments and name remapping that were provided at the command line.
- * For programmatic remappings you can use a different version of init() which takes
- * remappings directly, but for most command-line programs, passing argc and argv is
- * the easiest way to do it.  The third argument to init() is the name of the node.
- *
- * You must call one of the versions of ros::init() before using any other
- * part of the ROS system.
- */
 int main(int argc, char** argv) {
+  /**
+   * The ros::init() function needs to see argc and argv so that it can perform
+   * any ROS arguments and name remapping that were provided at the command line.
+   * For programmatic remappings you can use a different version of init() which takes
+   * remappings directly, but for most command-line programs, passing argc and argv is
+   * the easiest way to do it.  The third argument to init() is the name of the node.
+   *
+   * You must call one of the versions of ros::init() before using any other
+   * part of the ROS system.
+   */
   ros::init(argc, argv, "listener");
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -43,12 +46,25 @@ int main(int argc, char** argv) {
    * is the number of messages that will be buffered up before beginning to throw
    * away the oldest ones.
    */
-  ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
+  ros::Subscriber sub = n.subscribe("chatter", 5, chatterCallback);
   /**
    * ros::spin() will enter a loop, pumping callbacks.  With this version, all
    * callbacks will be called from within this thread (the main one).  ros::spin()
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
+
+  ros::Duration(5.0).sleep();
+  ros::ServiceClient client =
+   n.serviceClient<begineer_tutorials::modifyMessages>("modifyMessages");
+  begineer_tutorials::modifyMessages srv;
+  srv.request.newMsg = " \"Changed msg to Assignment completed successfully\"";
+  if (client.call(srv)) {
+    ROS_INFO_STREAM("Response received : "
+    << static_cast<int>(srv.response.resp));
+  } else {
+    ROS_ERROR_STREAM("Failed to call service ");
+    return 1;
+  }
   ros::spin();
   return 0;
 }
