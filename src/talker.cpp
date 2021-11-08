@@ -6,13 +6,18 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "begineer_tutorials/modifyMessages.h"
-
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
-
 std::string pubMessage;
-
+/** 
+* @brief Ros service server to change ros message being published
+* @param req  Standard variable of type modifyMessages::Request 
+* defined in the header file
+* @param res - Standard variable of type modifyMessages::Response
+* defined in the header file
+* @return bool value
+*/
 bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req, \
           const begineer_tutorials::modifyMessages::Response &res) {
   ROS_INFO_STREAM("Request recieved to change string to " << req.newMsg);
@@ -26,8 +31,11 @@ bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req, \
   }
   return false;
 }
-
-
+/**
+ * @brief This tutorial demonstrates simple sending of messages over the ROS system.
+ * @param argc argv
+ * @return None
+ */
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -66,12 +74,12 @@ int main(int argc, char **argv) {
    * buffer up before throwing some away.
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 5);
-  int frequency = 2;
+  int frequency = 3;
   bool result = n.getParam("frequency", frequency);
   if (result) {
     ROS_INFO_STREAM("successfully got the param");
   } else {
-    ROS_WARN_STREAM("Something is wrong with param");
+    ROS_WARN_STREAM("something is wrong with param");
   }
   ros::Rate loop_rate(frequency);
 
