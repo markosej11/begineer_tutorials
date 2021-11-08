@@ -1,7 +1,7 @@
-# begineer_tutorials
+## begineer_tutorials
 Tutorial on how to create a simple service to chnage the message
 
-# Overview
+## Overview
 * This repo shows how to write a simple publisher and subscriber and then to use a service to modify the message in C++11
 * The version of ROS used is melodic
 * This tutorial is created by referencing http://wiki.ros.org/ROS/Tutorials
@@ -11,12 +11,13 @@ Tutorial on how to create a simple service to chnage the message
 
 ## rqt_console screenshot
 ![image](https://github.com/markosej11/begineer_tutorials/blob/Week10_HW/Screenshot.png
-# Requirements
+
+## Requirements
 * catkin
 * ROS melodic
 * Ubuntu 18.04
 
-# Build Instructions
+## Build Instructions
 '''
 $ mkdir -p ~/catkin_ws/src
 $ cd ~/catkin_ws/src
@@ -27,7 +28,7 @@ $ catkin_make
 $ source ~/catkin_ws/devel/setup.bash
 '''
 
-# Running Instructions
+## Running Instructions
 ```
 roslaunch begineer_tutorials week10.launch 
 ```
