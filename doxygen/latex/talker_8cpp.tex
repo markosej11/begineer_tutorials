@@ -1,0 +1,115 @@
+\hypertarget{talker_8cpp}{}\section{/home/markose/catkin\+\_\+ws/src/begineer\+\_\+tutorials/src/talker.cpp File Reference}
+\label{talker_8cpp}\index{/home/markose/catkin\+\_\+ws/src/begineer\+\_\+tutorials/src/talker.\+cpp@{/home/markose/catkin\+\_\+ws/src/begineer\+\_\+tutorials/src/talker.\+cpp}}
+
+
+Publisher file  M\+IT License 2021 Markose Jacob.  
+
+
+{\ttfamily \#include \char`\"{}sstream\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}begineer\+\_\+tutorials/modify\+Messages.\+h\char`\"{}}\newline
+Include dependency graph for talker.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{talker_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{talker_8cpp_a28aada96921b8dd2f71bcc4a77320cec}{modify\+My\+Message} (begineer\+\_\+tutorials\+::modify\+Messages\+::\+Request \&req, const begineer\+\_\+tutorials\+::modify\+Messages\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Ros service server to change ros message being published. \end{DoxyCompactList}\item 
+int \hyperlink{talker_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em This tutorial demonstrates simple sending of messages over the R\+OS system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{talker_8cpp_a200c9070506e9fc04c213d1025f9d6fb}{pub\+Message}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Publisher file  M\+IT License 2021 Markose Jacob. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{talker_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{talker_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{talker.\+cpp@{talker.\+cpp}!main@{main}}
+\index{main@{main}!talker.\+cpp@{talker.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+This tutorial demonstrates simple sending of messages over the R\+OS system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & argv \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+The ros\+::init() function needs to see argc and argv so that it can perform any R\+OS arguments and name remapping that were provided at the command line. For programmatic remappings you can use a different version of init() which takes remappings directly, but for most command-\/line programs, passing argc and argv is the easiest way to do it. The third argument to init() is the name of the node.
+
+You must call one of the versions of ros\+::init() before using any other part of the R\+OS system.
+
+Node\+Handle is the main access point to communications with the R\+OS system. The first Node\+Handle constructed will fully initialize this node, and the last Node\+Handle destructed will close down the node.
+
+The advertise() function is how you tell R\+OS that you want to publish on a given topic name. This invokes a call to the R\+OS master node, which keeps a registry of who is publishing and who is subscribing. After this advertise() call is made, the master node will notify anyone who is trying to subscribe to this topic name, and they will in turn negotiate a peer-\/to-\/peer connection with this node. advertise() returns a Publisher object which allows you to publish messages on that topic through a call to publish(). Once all copies of the returned Publisher object are destroyed, the topic will be automatically unadvertised.
+
+The second parameter to advertise() is the size of the message queue used for publishing messages. If messages are published more quickly than we can send them, the number here specifies how many messages to buffer up before throwing some away.
+
+A count of how many messages we have sent. This is used to create a unique string for each message.
+
+The publish() function is how you send messages. The parameter is the message object. The type of this object must agree with the type given as a template parameter to the advertise$<$$>$() call, as was done in the constructor above.Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{talker_8cpp_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{talker_8cpp_a28aada96921b8dd2f71bcc4a77320cec}\label{talker_8cpp_a28aada96921b8dd2f71bcc4a77320cec}} 
+\index{talker.\+cpp@{talker.\+cpp}!modify\+My\+Message@{modify\+My\+Message}}
+\index{modify\+My\+Message@{modify\+My\+Message}!talker.\+cpp@{talker.\+cpp}}
+\subsubsection{\texorpdfstring{modify\+My\+Message()}{modifyMyMessage()}}
+{\footnotesize\ttfamily bool modify\+My\+Message (\begin{DoxyParamCaption}\item[{begineer\+\_\+tutorials\+::modify\+Messages\+::\+Request \&}]{req,  }\item[{const begineer\+\_\+tutorials\+::modify\+Messages\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Ros service server to change ros message being published. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & Standard variable of type modify\+Messages\+::\+Request defined in the header file \\
+\hline
+{\em res} & -\/ Standard variable of type modify\+Messages\+::\+Response defined in the header file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool value 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{talker_8cpp_a28aada96921b8dd2f71bcc4a77320cec_icgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{talker_8cpp_a200c9070506e9fc04c213d1025f9d6fb}\label{talker_8cpp_a200c9070506e9fc04c213d1025f9d6fb}} 
+\index{talker.\+cpp@{talker.\+cpp}!pub\+Message@{pub\+Message}}
+\index{pub\+Message@{pub\+Message}!talker.\+cpp@{talker.\+cpp}}
+\subsubsection{\texorpdfstring{pub\+Message}{pubMessage}}
+{\footnotesize\ttfamily std\+::string pub\+Message}
+
+This tutorial demonstrates simple sending of messages over the R\+OS system. 
