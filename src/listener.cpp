@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
    * will exit when Ctrl-C is pressed, or the node is shutdown by the master.
    */
 
-  ros::Duration(15.0).sleep();
+  ros::Duration(5.0).sleep();
   ros::ServiceClient client =
    n.serviceClient<begineer_tutorials::modifyMessages>("modifyMessages");
   begineer_tutorials::modifyMessages srv;
