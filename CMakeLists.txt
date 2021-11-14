@@ -16,6 +16,11 @@ generate_messages(DEPENDENCIES std_msgs)
 ## Declare a catkin package
 catkin_package()
 
+## Add Testing related stuff
+find_package(rostest REQUIRED)
+add_rostest_gtest(mytests test/mySrvTest.test test/srvTest.cpp)
+target_link_libraries(mytests ${catkin_LIBRARIES})
+
 ## Build talker and listener
 include_directories(include ${catkin_INCLUDE_DIRS})
 
