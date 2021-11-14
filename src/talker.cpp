@@ -6,6 +6,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "begineer_tutorials/modifyMessages.h"
+#include "tf/transform_broadcaster.h"
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -24,10 +25,12 @@ bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req, \
   try {
     pubMessage = req.newMsg;
     ROS_WARN_STREAM("Successfully changed the string message");
+    res.resp = true;
     return true;
   }
   catch (const std::exception&) {
     ROS_ERROR_STREAM("Couldn't change the string message");
+    res.resp = false;
   }
   return false;
 }
@@ -84,12 +87,19 @@ int main(int argc, char **argv) {
   ros::Rate loop_rate(frequency);
 
   ROS_DEBUG_STREAM_ONCE("This is a Debug Stream" << " Message");
+
+  tf::TransformBroadcaster br;
+  tf::Transform transform;
+  transform.setOrigin(tf::Vecroe3(1,2,0));
+  tf::Quaternion q;
+  q.setRPY(0,0,1);
+  transform.setRotation(q);
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
    */
   int count = 0;
-  pubMessage = "Week 10 assignment ";
+  pubMessage = "Week 11 assignment ";
   while (ros::ok()) {
     std_msgs::String msg;
     std::stringstream ss;
