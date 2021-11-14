@@ -7,6 +7,7 @@
 #include "std_msgs/String.h"
 #include "begineer_tutorials/modifyMessages.h"
 #include "tf/transform_broadcaster.h"
+#include <ros/console.h>
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -19,8 +20,8 @@ std::string pubMessage;
 * defined in the header file
 * @return bool value
 */
-bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req, \
-          const begineer_tutorials::modifyMessages::Response &res) {
+bool modifyMyMessage(begineer_tutorials::modifyMessages::Request &req,
+           begineer_tutorials::modifyMessages::Response &res) {
   ROS_INFO_STREAM("Request recieved to change string to " << req.newMsg);
   try {
     pubMessage = req.newMsg;
@@ -57,8 +58,7 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-  ros::ServiceServer service = n.advertiseService("modifyMessages",
-  modifyMyMessage);
+  ros::ServiceServer service = n.advertiseService("modifyMessages", modifyMyMessage);
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -71,6 +71,7 @@ int main(int argc, char **argv) {
    * all copies of the returned Publisher object are destroyed, the topic
    * will be automatically unadvertised.
    *
+   * 
    * The second parameter to advertise() is the size of the message queue
    * used for publishing messages.  If messages are published more quickly
    * than we can send them, the number here specifies how many messages to
@@ -85,14 +86,16 @@ int main(int argc, char **argv) {
     ROS_WARN_STREAM("something is wrong with param");
   }
   ros::Rate loop_rate(frequency);
-
+  /**
+   * A count of how many messages we have sent. This is used to create
+   * a unique string for each message.
+   */
   ROS_DEBUG_STREAM_ONCE("This is a Debug Stream" << " Message");
-
   tf::TransformBroadcaster br;
   tf::Transform transform;
-  transform.setOrigin(tf::Vecroe3(1,2,0));
+  transform.setOrigin(tf::Vector3(1, 2, 0));
   tf::Quaternion q;
-  q.setRPY(0,0,1);
+  q.setRPY(0, 0, 1);
   transform.setRotation(q);
   /**
    * A count of how many messages we have sent. This is used to create
@@ -103,7 +106,7 @@ int main(int argc, char **argv) {
   while (ros::ok()) {
     std_msgs::String msg;
     std::stringstream ss;
-    ss << pubMessage <<count;
+    ss << pubMessage << count;
     msg.data = ss.str();
     ROS_INFO_STREAM("Talker : " << msg.data.c_str());
     /**
@@ -113,10 +116,12 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
-    ROS_WARN_STREAM_ONCE("This is a Warn Stream" << " Message");
-    ROS_INFO_STREAM_ONCE("This is a Info Stream" << " Message");
-    ROS_ERROR_STREAM_ONCE("This is a Error Stream" << " Message");
-    ROS_FATAL_STREAM_ONCE("This is a Fatal Stream" << " Message");
+    br.sendTransform(tf::StampedTransform(transform,
+             ros::Time::now(), "world", "talk"));
+    ROS_WARN_STREAM_ONCE("Talker : This is a Warn Stream" << " Message");
+    ROS_INFO_STREAM_ONCE("Talker : This is a Info Stream" << " Message");
+    ROS_ERROR_STREAM_ONCE("Talker : This is a Error Stream" << " Message");
+    ROS_FATAL_STREAM_ONCE("Talker : This is a Fatal Stream" << " Message");
     ros::spinOnce();
     loop_rate.sleep();
     ++count;

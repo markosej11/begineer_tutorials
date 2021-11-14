@@ -4,10 +4,11 @@
 #include <std_msgs/String.h>
 #include <bits/stdc++.h>
 #include <sstream>
+#include <ros/console.h>
 
 
 TEST(TestSuite, testCase1) {
-	ROS_INFO_STREAM("Started TEST");
+	ROS_INFO("Started TEST");
 	ros::NodeHandle nh;
 	ros::ServiceClient client =
   		nh.serviceClient<begineer_tutorials::modifyMessages>("modifyMessages");
@@ -15,7 +16,7 @@ TEST(TestSuite, testCase1) {
   	srv.request.newMsg = "\"Changed msg to Assignment completed successfully\"";
   	ros::Rate sleep_rate(5);
   	if (client.call(srv)) {
-    	ROS_INFO_STREAM("Response received : ", static_cast<bool>(srv.response.resp));
+    	ROS_INFO("Response received : %d", static_cast<bool>(srv.response.resp));
     	sleep_rate.sleep();
     	ros::Duration dur(5);
     	EXPECT_EQ(static_cast<bool>(srv.response.resp), true);
