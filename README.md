@@ -1,8 +1,9 @@
 ## begineer_tutorials
-Tutorial on how to create a simple service to chnage the message
+Tutorial on how to use TF broadcaster and rosbags
 
 ## Overview
 * This repo shows how to write a simple publisher and subscriber and then to use a service to modify the message in C++11
+* It also contains the demonstration of a broadcaster which uses TF library as well as the use of ROS bags and gtesting
 * The version of ROS used is melodic
 * This tutorial is created by referencing http://wiki.ros.org/ROS/Tutorials
 * The launch file "week10.launch" starts a publisher and suscriber. After
@@ -30,13 +31,26 @@ $ source ~/catkin_ws/devel/setup.bash
 
 ## Running Instructions
 ```
-roslaunch begineer_tutorials week10.launch 
+roslaunch begineer_tutorials week11.launch 
 ```
 The above will launch the 2 nodes and the talker will publish at 8hz default. 
 ```
-roslaunch begineer_tutorials week10.launch pub_freq:=<Enter an integer value here>
+roslaunch begineer_tutorials week11.launch pub_freq:=<Enter an integer value here>
 ```
 The above will launch the 2 nodes and the talker will publish at the input frequency chosen by you.
+
+The above commands also starts a rosbag which records for 15 seconds.
+
+It also publishes to /tf. To check the publish transform, run the bellow command
+```
+rostopic echo /tf 
+```
+
+To run the unit tests for th ros service run the below command
+```
+cd ~/catkin_make
+catkin_make run_tests_begineer_tutorials
+```
 
 
  
