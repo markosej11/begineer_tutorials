@@ -4,6 +4,6 @@
   <node name="talker" pkg="begineer_tutorials" type="talker" output="screen"/>
    <param name="frequency" value="$(arg pub_freq)"/>
   <node name="listener" pkg="begineer_tutorials" type="listener" output="screen"/>
-  <node pkg="rosbag" name="record" type="record" args="--duration=15 -a -O $(find begineer_tutorials)/bags/sample.bag"
+  <node pkg="rosbag" name="record" type="record" args="--duration=15 -a -O $(find begineer_tutorials)/results/bags/sample.bag"
   if="$(arg ifRecord)"/>
 </launch>
