@@ -63,7 +63,6 @@ int main(int argc, char** argv) {
     << static_cast<int>(srv.response.resp));
   } else {
     ROS_ERROR_STREAM("Failed to call service ");
-    return 1;
   }
   ros::spin();
   return 0;
